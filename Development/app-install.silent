@@ -1,0 +1,81 @@
+####################################################################################################################################################
+#                                                                                                                                                  #
+# Below you will find all variables used by the Interstage BPM installation script. All of the variable are to be set at the top of this file,     #
+# there are no variables to be set in the section of this file containing the explanation per variable, which you can find at the bottom of this   #
+# file.                                                                                                                                            #
+#                                                                                                                                                  #
+####################################################################################################################################################
+
+
+INSTALL_DIR:/opt
+IBPMHOSTNAME:interstagedemo
+FLOWABLEHOSTNAME:flowabledemo
+ORACLEHTTP:8880
+ORACLELIST:1521
+ORACLEPWD:Fujitsu1
+ORACLESTART:y
+JBOSSUSER:admin
+JBOSSPWD:Fujitsu.1
+NEWVMVERSION:007
+CLEANINSTALL:yes
+RESETROOTPW:yes
+REBOOTEND:yes
+JBOSSINSTALL:yes
+IBPMINSTALL:yes
+INSTALLDB:postgres
+INSTALLMAIL:posthoc
+APPLICATION:IBPM
+KEVERSION:latest
+
+####################################################################################################################################################
+#                                                                                                                                                  #
+# Below you will find the explanation of all variables to be set above.                                                                            #
+#                                                                                                                                                  #
+# All of the variables and their values should be entered in this exact format in this file :                                                      #
+#                                                                                                                                                  #
+# VARIABLENAME:VALUE                                                                                                                               #
+#                                                                                                                                                  #
+#                                                                                                                                                  #
+# INSTALL_DIR : This is the directory in which you want to install all of the software. At the end of the installation, this directory will        #
+#               contain the sub-directories per software component, unless the software needs to be installed into another directory such as       #
+#               is the case with e.g. JDK.                                                                                                         #
+#                                                                                                                                                  #
+# NEWHOSTNAME : Specify the hostname as you would like it to be for this new server / VM.                                                          #
+#                                                                                                                                                  #
+# ORACLEHTTP : Specify the portnumber on which you want the Oracle Admin Web Page to run.                                                          #
+#                                                                                                                                                  #
+# ORACLELIST : Specify the portnumber on which you want the Oracle Listener to run.                                                                #
+#                                                                                                                                                  #
+# ORACLEPWD : Specify the password for the Oracle SYS and SYSTEM accounts.                                                                         #
+#                                                                                                                                                  #
+# JBOSSUSER : Specify the management user to be added to JBoss to access the JBoss console.                                                        #
+#                                                                                                                                                  #
+# JBOSSPWD : Specify the password to be set for the JBOSSUSER.                                                                                     #
+#                                                                                                                                                  #
+# ORACLESTART : Specify if you want Oracle to start at boot time ( y / n ).                                                                        #
+#                                                                                                                                                  #
+# NEWVMVERSION : Specify the VM version number of this new VM as you want it to appear on the Welcome Web page.                                    #
+#                                                                                                                                                  #
+# CLEANINSTALL : Specify if you want the installation script to remove the install directory at the end of a succesful installation. This install  #
+#                directory is the directory in which you initially transferred all files required for the installation into. ( yes / no )          #
+#                                                                                                                                                  #
+# RESETROOTPW : Specify if you want the installation script to reset the root password to the default value typically used for the demo VM.        #
+#               Value should be 'yes' or 'no'.                                                                                                     #
+#                                                                                                                                                  #
+# REBOOTEND : Specify if you want the installation script to perform a reboot at the end of a succesful installation. A reboot is required at the  #
+#             end. ( yes / no )                                                                                                                    #
+#                                                                                                                                                  #
+# JBOSSINSTALL : Specify if you want JBoss to be installed automatically. If not, the JBoss installation, configuration as well as the             #
+#                Interstage BPM setup and installation will be skipped. ( yes / no )                                                               #
+#                                                                                                                                                  #
+# IBPMINSTALL : Specify if you want I-BPM to be installed. If not, I-BPM as well as the BPMAction library will not be installed. ( yes / no )      #
+#                                                                                                                                                  #
+# INSTALLDB : Specify the database to be used for JBoss / I-BPM. ( oracle / postgres )                                                             #
+#                                                                                                                                                  #
+# INSTALLMAIL : Specify the Mail Client to be used. ( posthoc / kmail )                                                                            #
+#                                                                                                                                                  #
+# APPLICATION : Specify the application to be installed, I-BPM or Flowable. ( IBPM / FLOWABLE )                                                    #
+#                                                                                                                                                  #
+# KEVERSION : Specify the Kibana and E.S. version to be installed with IBPM ( latest / older )                                                     #
+#                                                                                                                                                  #
+####################################################################################################################################################

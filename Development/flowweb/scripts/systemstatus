@@ -1,0 +1,51 @@
+Init()
+{
+	STATUSresult=/var/www/html/scripts/STATUSresult.json
+	README=/root/README.txt
+	VERSIONresult=/var/www/html/scripts/version.json
+}
+
+Checks()
+{
+	if ps -ef|grep "postgres -D"|grep -v grep >/dev/null
+	then
+		Databasestatus="Running"
+	else
+		Databasestatus="Stopped"
+	fi
+	if ps -ef|grep "kibana" | grep "node" >/dev/null
+	then
+		Kibanastatus="Running"
+	else
+		Kibanastatus="Stopped"
+	fi
+	if ps -ef|grep "catalina" | grep "tomcat" >/dev/null
+	then
+		Tomcatstatus="Running"
+	else
+		Tomcatstatus="Stopped"
+	fi
+	if service elasticsearch status | grep "running" >/dev/null
+	then
+		ESstatus="Running"
+	else
+		ESstatus="Stopped"
+	fi
+
+	echo "{\"database\":\"$Databasestatus\",\"tomcat\":\"$Tomcatstatus\",\"kibana\":\"$Kibanastatus\",\"elasticsearch\":\"$ESstatus\"}">$STATUSresult
+}
+
+Version()
+{
+	VERSION=`cat $README|grep "version :"|cut -f2 -d":"|sed 's/[^0-9]*//g'`
+	echo "{\"version\":\"$VERSION\"}">$VERSIONresult
+}
+
+Main()
+{
+	Init
+	Checks
+	Version
+}
+
+Main

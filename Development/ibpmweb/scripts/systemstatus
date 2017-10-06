@@ -1,0 +1,70 @@
+Init()
+{
+	STATUSresult=/var/www/html/scripts/STATUSresult.json
+	README=/root/README.txt
+	VERSIONresult=/var/www/html/scripts/version.json
+}
+
+Checks()
+{
+	if ps -ef|grep "/opt/jboss-eap-6.1/bin/domain.sh" | grep -v grep >/dev/null
+	then
+		IBPMstatus="Running"
+	else
+		IBPMstatus="Stopped"
+	fi
+	if [ -f /etc/rc.d/init.d/oracle-xe ]
+	then
+		if service oracle-xe status|grep "no listener" >/dev/null
+		then
+			if service oracle-xe status|grep "Connection refused" >/dev/null
+			then
+				ORACLEstatus="Stopped"
+			fi
+		else
+				ORACLEstatus="Running"
+		fi
+	else
+		if ps -ef|grep "edb-postgres -D"|grep -v grep >/dev/null
+		then
+			ORACLEstatus="Running"
+		else
+			ORACLEstatus="Stopped"
+		fi
+	fi
+	if ps -ef|grep "kibana" | grep "node" >/dev/null
+	then
+		Kibanastatus="Running"
+	else
+		Kibanastatus="Stopped"
+	fi
+	if service elasticsearch status | grep "running" >/dev/null
+	then
+		ESstatus="Running"
+	else
+		ESstatus="Stopped"
+	fi
+	if ps -ef|grep alfresco|grep org.apache.catalina.startup.Bootstrap >/dev/null
+	then
+		Alfrescostatus="Running"
+	else
+		Alfrescostatus="Stopped"
+	fi
+
+	echo "{\"database\":\"$ORACLEstatus\",\"jbossibpm\":\"$IBPMstatus\",\"kibana\":\"$Kibanastatus\",\"elasticsearch\":\"$ESstatus\",\"alfresco\":\"$Alfrescostatus\"}">$STATUSresult
+}
+
+Version()
+{
+	VERSION=`cat $README|grep "version :"|cut -f2 -d":"|sed 's/[^0-9]*//g'`
+	echo "{\"version\":\"$VERSION\"}">$VERSIONresult
+}
+
+Main()
+{
+	Init
+	Checks
+	Version
+}
+
+Main
